@@ -1,3 +1,10 @@
+Yes, you can retain the original size of the video and ensure it doesn’t stretch by using CSS to position it properly. This approach involves using the `object-fit` property to handle how the video fits within its container, along with setting constraints to keep its original dimensions.
+
+Here’s how you can adjust your code to retain the original size of the video:
+
+### Updated Code with Original Video Size
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,29 +37,29 @@
 
         /* Video background */
         .video-background {
-            position: fixed;
+            position: absolute;
             top: 50%;
             left: 50%;
-            width: 100%;
-            height: 100%;
             transform: translate(-50%, -50%);
             z-index: -2; /* Behind the overlay but in front of the background image */
+            /* Adjust these dimensions as needed for the video size */
+            max-width: 100vw; /* Ensure video doesn’t overflow horizontally */
+            max-height: 100vh; /* Ensure video doesn’t overflow vertically */
         }
 
         /* Default video behavior */
         .video-background.desktop {
-            object-fit: cover; /* Cover the screen on desktop */
+            object-fit: contain; /* Retains the aspect ratio and avoids stretching */
         }
 
         .video-background.mobile {
-            object-fit: contain; /* Contain the video on mobile */
+            object-fit: contain; /* Retains the aspect ratio and avoids stretching */
         }
 
         /* Mobile adjustments */
         @media (max-width: 767px) {
             .video-background {
-                object-fit: contain; /* Contain the video on mobile */
-                background: none; /* Ensure background image does not interfere */
+                object-fit: contain; /* Retains the aspect ratio on mobile */
             }
 
             .circle-container {
@@ -301,27 +308,4 @@
             <div class="call-to-action">
                 Send me a message, I'll be waiting for you💋
                 <div class="cta-detail">Let's talk here👇🏻👇🏻</div>
-                <div class="button-container">
-                    <a href="https://onlyfans.com/cutelittlecindy/c7" class="transparent-button">
-                        <img src="images/OnlyFans-Symbol.png" alt="OnlyFans Symbol" class="button-icon">
-                        <span class="button-text">OnlyFans VIP</span>
-                    </a>
-                    <a href="https://onlyfans.com/cutelittlecindy/c7" class="transparent-button">
-                        Click here for Free OnlyFans🥰 
-                    </a>
-                </div>
-            </div>
-            <!-- Date display -->
-            <div class="date-display" id="date">Free until today,</div>
-        </div>
-    </div>
-    <script>
-        window.onload = function() {
-            // Display current date
-            const now = new Date();
-            const dateStr = `Free until today, ${now.toDateString()}`;
-            document.getElementById('date').textContent = dateStr;
-        };
-    </script>
-</body>
-</html>
+                <div
